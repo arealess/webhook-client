@@ -13,7 +13,7 @@ import { getMessaging, getToken } from "firebase/messaging";
 export default function Home() {
   useEffect(() => {
     //service worker registration
-    if(typeof window !== 'undefined' && 'serviceWorker' in navigator){
+    if(typeof navigator !== 'undefined' && 'serviceWorker' in navigator){
       navigator.serviceWorker.register('/firebase-messaging-sw.js')
       .then((registration) => {
         console.log('service worker registered with scope:', registration.scope);
