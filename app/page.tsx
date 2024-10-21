@@ -43,9 +43,17 @@ export default function Home() {
     requestPermission();
 
     //listen message from FCM
-    onMessageListener().then((payload) => {
-      console.log('Message received:', payload);
-    }).catch((error) => console.log('failed:', error));
+    //onMessageListener().then((payload) => {
+    //  console.log('Message received:', payload);
+    //}).catch((error) => console.log('failed:', error));
+    if(typeof window !== 'undefined'){
+      const app = initializeApp(firebaseConfig);
+      const messaging = getMessaging(app);
+      onMessage(messaging, (payload)=>{
+          console.log('Message received:', payload);
+      });
+    }
+    
   }, []);
 
   function convertString(value: string | undefined): string {
