@@ -1,15 +1,17 @@
 importScripts('https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js')
 importScripts('https://www.gstatic.com/firebasejs/10.5.2/firebase-messaging-compat.js')
 
-//firebase init
-firebase.initializeApp({
-    apiKey: "AIzaSyDBTMv1nPOPnWtz7v0eyIHBDnU5FYft_2M",
-    authDomain: "nttditial--sff.firebaseapp.com",
-    projectId: "nttditial--sff",
-    storageBucket: "nttditial--sff.appspot.com",
-    messagingSenderId: "633790392845",
-    appId: "1:633790392845:web:4316fa37b819260f798344",
-});
+if (typeof window !== 'undefined' && !firebase.apps.length){
+    //firebase init
+    firebase.initializeApp({
+        apiKey: "AIzaSyDBTMv1nPOPnWtz7v0eyIHBDnU5FYft_2M",
+        authDomain: "nttditial--sff.firebaseapp.com",
+        projectId: "nttditial--sff",
+        storageBucket: "nttditial--sff.appspot.com",
+        messagingSenderId: "633790392845",
+        appId: "1:633790392845:web:4316fa37b819260f798344",
+    });
+}
 
 //get FCM
 const messaging = firebase.messaging();
