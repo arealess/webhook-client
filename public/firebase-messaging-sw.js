@@ -12,6 +12,16 @@ import { getMessaging } from "firebase/messaging";
 //    messagingSenderId: "633790392845",
 //    appId: "1:633790392845:web:4316fa37b819260f798344",
 //});
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDBTMv1nPOPnWtz7v0eyIHBDnU5FYft_2M",
+    authDomain: "nttditial--sff.firebaseapp.com",
+    projectId: "nttditial--sff",
+    storageBucket: "nttditial--sff.appspot.com",
+    messagingSenderId: "633790392845",
+    appId: "1:633790392845:web:4316fa37b819260f798344",
+};
+
 const app = initializeApp(firebaseConfig);
 
 //get FCM
