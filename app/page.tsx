@@ -1,6 +1,6 @@
 'use client'
 
-import {onMessageListener} from '../lib/firebase';
+//import {onMessageListener} from '../lib/firebase';
 import { useEffect } from "react";
 //import firebase from "firebase/compat/app";
 import { getFirestore, setDoc, doc } from "firebase/firestore";
@@ -9,6 +9,7 @@ import { initializeApp } from "firebase/app";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 //import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { getMessaging, getToken } from "firebase/messaging";
+import { onMessage } from "firebase/messaging";
 
 export default function Home() {
   useEffect(() => {
