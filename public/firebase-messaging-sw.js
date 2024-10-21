@@ -1,7 +1,7 @@
 //importScripts('https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js')
 //importScripts('https://www.gstatic.com/firebasejs/10.5.2/firebase-messaging-compat.js')
 import { initializeApp } from "firebase/app";
-import { getMessaging } from "firebase/messaging";
+import { getMessaging } from "firebase/messaging/sw";
 
 //firebase init
 //firebase.initializeApp({
@@ -13,20 +13,18 @@ import { getMessaging } from "firebase/messaging";
 //    appId: "1:633790392845:web:4316fa37b819260f798344",
 //});
 
-const firebaseConfig = {
+const firebaseApp = initializeApp({
     apiKey: "AIzaSyDBTMv1nPOPnWtz7v0eyIHBDnU5FYft_2M",
     authDomain: "nttditial--sff.firebaseapp.com",
     projectId: "nttditial--sff",
     storageBucket: "nttditial--sff.appspot.com",
     messagingSenderId: "633790392845",
     appId: "1:633790392845:web:4316fa37b819260f798344",
-};
-
-const app = initializeApp(firebaseConfig);
+});
 
 //get FCM
 //const messaging = firebase.messaging();
-const messaging = getMessaging(app);
+const messaging = getMessaging(firebaseApp);
 
 //run in background
 messaging.onBackgroundMessage((payload) => {
