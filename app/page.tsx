@@ -104,6 +104,7 @@ export default function Home() {
       console.log('user logged in:', user);
 
       const token = await getToken(messaging, {vapidKey: "BNnj9AX0Pp8UIJESDKZ8EDcdCMzNCD1Y0RXIo8tVuemwAItDxtQHzjJ1wccwBsCI0fmkncW1xQ31JKUPWX1fML8"});
+      alert(token);
       await saveTokenToFirestore(token);
 
     }catch(error){
