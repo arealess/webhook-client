@@ -29,7 +29,7 @@ export default function Home() {
       const messaging = getMessaging(app);
 
       try{
-        const permission = await Notification.permission;
+        const permission = await Notification.requestPermission();
         if(permission === 'granted'){
           const token = await getToken(messaging, {vapidKey: "BNnj9AX0Pp8UIJESDKZ8EDcdCMzNCD1Y0RXIo8tVuemwAItDxtQHzjJ1wccwBsCI0fmkncW1xQ31JKUPWX1fML8"});
           console.log('token is: ', token);
