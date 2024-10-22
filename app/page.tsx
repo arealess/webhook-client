@@ -101,7 +101,9 @@ export default function Home() {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       alert(user.uid);
+      alert('userid=' + user.uid);
       console.log('user logged in:', user);
+      alert('here');
 
       const token = await getToken(messaging, {vapidKey: "BNnj9AX0Pp8UIJESDKZ8EDcdCMzNCD1Y0RXIo8tVuemwAItDxtQHzjJ1wccwBsCI0fmkncW1xQ31JKUPWX1fML8"});
       alert(token);
