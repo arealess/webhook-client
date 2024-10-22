@@ -62,6 +62,7 @@ export default function Home() {
   }
 
   const saveTokenToFirestore = async (token: string) => {
+    alert('token=' + token);
     const app = initializeApp(firebaseConfig);
     const firestore = getFirestore(app);
     const auth = getAuth(app);
@@ -70,6 +71,7 @@ export default function Home() {
       try{
         //savr userId to session in webhook server
         const userId = convertString(user?.uid);
+        alert('userId=' + userId);
         await fetch('https://nft-webhook2.vercel.app/api/session/set', {
           method: 'POST',
           headers: {
