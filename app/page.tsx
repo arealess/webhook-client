@@ -8,7 +8,7 @@ import { firebaseConfig } from "@/consts/firebase_config";
 import { initializeApp } from "firebase/app";
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 //import { getMessaging, getToken, onMessage } from "firebase/messaging";
-import { getMessaging, getToken } from "firebase/messaging";
+import { getMessaging, getToken, isSupported } from "firebase/messaging";
 import { onMessage } from "firebase/messaging";
 
 export default function Home() {
@@ -29,13 +29,18 @@ export default function Home() {
       const messaging = getMessaging(app);
 
       try{
-        const permission = await Notification.requestPermission();
-        if(permission === 'granted'){
-          const token = await getToken(messaging, {vapidKey: "BNnj9AX0Pp8UIJESDKZ8EDcdCMzNCD1Y0RXIo8tVuemwAItDxtQHzjJ1wccwBsCI0fmkncW1xQ31JKUPWX1fML8"});
-          console.log('token is: ', token);
-
-          await saveTokenToFirestore(token);
+        const isSupportedBrowser = await isSupported();
+        if (isSupportedBrowser) {
+          const permission = await Notification.requestPermission();
+          if(permission === 'granted'){
+            const token = await getToken(messaging, {vapidKey: "BNnj9AX0Pp8UIJESDKZ8EDcdCMzNCD1Y0RXIo8tVuemwAItDxtQHzjJ1wccwBsCI0fmkncW1xQ31JKUPWX1fML8"});
+            console.log('token is: ', token);
+            await saveTokenToFirestore(token);
+          }else{
+            alert("Firebase is not supported in this browser");
+          }
         }
+        
       }catch(error){
         console.log('error occured:', error);
       }
