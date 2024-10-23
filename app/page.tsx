@@ -24,29 +24,29 @@ export default function Home() {
       })
     }
 
-    const requestPermission = async () => {
-      const app = initializeApp(firebaseConfig);
-      const messaging = getMessaging(app);
+    // const requestPermission = async () => {
+    //   const app = initializeApp(firebaseConfig);
+    //   const messaging = getMessaging(app);
 
-      try{
-        const isSupportedBrowser = await isSupported();
-        if (isSupportedBrowser) {
-          const permission = await Notification.requestPermission();
-          if(permission === 'granted'){
-            const token = await getToken(messaging, {vapidKey: "BNnj9AX0Pp8UIJESDKZ8EDcdCMzNCD1Y0RXIo8tVuemwAItDxtQHzjJ1wccwBsCI0fmkncW1xQ31JKUPWX1fML8"});
-            console.log('token is: ', token);
-            await saveTokenToFirestore(token);
-          }else{
-            alert("Firebase is not supported in this browser");
-          }
-        }
+    //   try{
+    //     const isSupportedBrowser = await isSupported();
+    //     if (isSupportedBrowser) {
+    //       const permission = await Notification.requestPermission();
+    //       if(permission === 'granted'){
+    //         const token = await getToken(messaging, {vapidKey: "BNnj9AX0Pp8UIJESDKZ8EDcdCMzNCD1Y0RXIo8tVuemwAItDxtQHzjJ1wccwBsCI0fmkncW1xQ31JKUPWX1fML8"});
+    //         console.log('token is: ', token);
+    //         await saveTokenToFirestore(token);
+    //       }else{
+    //         alert("Firebase is not supported in this browser");
+    //       }
+    //     }
         
-      }catch(error){
-        console.log('error occured:', error);
-      }
-    }
+    //   }catch(error){
+    //     console.log('error occured:', error);
+    //   }
+    // }
 
-    requestPermission();
+    //requestPermission();
 
     //listen message from FCM
     //onMessageListener().then((payload) => {
@@ -119,9 +119,32 @@ export default function Home() {
     }
   }
 
+  const requestPermission = async () => {
+    const app = initializeApp(firebaseConfig);
+    const messaging = getMessaging(app);
+
+    try{
+      const isSupportedBrowser = await isSupported();
+      if (isSupportedBrowser) {
+        const permission = await Notification.requestPermission();
+        if(permission === 'granted'){
+          const token = await getToken(messaging, {vapidKey: "BNnj9AX0Pp8UIJESDKZ8EDcdCMzNCD1Y0RXIo8tVuemwAItDxtQHzjJ1wccwBsCI0fmkncW1xQ31JKUPWX1fML8"});
+          console.log('token is: ', token);
+          await saveTokenToFirestore(token);
+        }else{
+          alert("Firebase is not supported in this browser");
+        }
+      }
+      
+    }catch(error){
+      console.log('error occured:', error);
+    }
+  }
+
   return (
     <div>
       <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={login}>login</button>
+      <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={requestPermission}>GetToken</button>
     </div>
   );
 }
